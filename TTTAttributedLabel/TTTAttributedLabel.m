@@ -1240,11 +1240,14 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
 
         switch (result.resultType) {
             case NSTextCheckingTypeLink:
+            {
+                [[UIApplication sharedApplication] openURL:result.URL];
                 if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithURL:)]) {
                     [self.delegate attributedLabel:self didSelectLinkWithURL:result.URL];
                     return;
                 }
                 break;
+            }
             case NSTextCheckingTypeAddress:
                 if ([self.delegate respondsToSelector:@selector(attributedLabel:didSelectLinkWithAddress:)]) {
                     [self.delegate attributedLabel:self didSelectLinkWithAddress:result.addressComponents];
